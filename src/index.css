@@ -1,13 +1,22 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* these give the page a background image and prevents it from scrolling with the rest of the page */
+  /* the first url is landscape, the second is portrait; use whichever works better */
+  background-image: url(https://wallpaperaccess.com/full/343990.jpg);
+  /* background-image: url(https://www.ixpap.com/images/2021/01/plant-wallpaper-ixpap-12.jpg); */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover; /*makes image fit the screen horizontally*/
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
