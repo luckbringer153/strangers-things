@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "error": null,
+  "data": {
+    "message": {
+      "_id": "622f67cd7b4f410017da16c5",
+      "content": "new message",
+      "post": "622ed5187b4f410017da16a1",
+      "fromUser": "622f643f7b4f410017da16bb",
+      "createdAt": "2022-03-14T16:05:33.828Z",
+      "updatedAt": "2022-03-14T16:05:33.828Z",
+      "__v": 0
+    }
+  }
+}

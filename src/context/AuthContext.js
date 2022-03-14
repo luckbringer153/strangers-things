@@ -1,4 +1,3 @@
-//in the March 11th videos, Daniel makes official token requests. That's where you should look to get the values below
 import React, { useState, useEffect } from "react";
 
 // use AuthProvider for, say, authentication info
@@ -30,7 +29,7 @@ export default function AuthProvider({ children }) {
   };
 
   // const providerValue = { pizza: "pizza" };
-  //this function will be used throughout application to check for logged-in status
+  //this function and its info inside will be used throughout application to check for logged-in status
   const providerValue = {
     token,
     isLoggedIn: !!token,

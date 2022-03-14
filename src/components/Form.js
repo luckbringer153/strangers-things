@@ -17,7 +17,8 @@ export default function Form() {
 
     try {
       const response = await fetch(
-        "http://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/users/register",
+        //register only works once for each username/password pair; use /login for further calls
+        "http://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/users/login",
         {
           method: "POST",
           headers: {
@@ -27,11 +28,13 @@ export default function Form() {
         }
       );
 
-      const { success, error, data } = await response.json();
+      //success is true or false; error and data can either be falsey/empty string or truthy/string message; removed error here because it wasn't being used
+      const { success, data } = await response.json();
 
       if (success) {
+        console.log(data);
         //save token to local storage
-        localStorage.st_token = data.st_token;
+        localStorage.st_token = data.token;
         updateAuthStatus();
       } else {
         throw new Error("error registering user");
