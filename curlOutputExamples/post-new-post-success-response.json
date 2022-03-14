@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "error": null,
+  "data": {
+    "post": {
+      "location": "Chicago, IL",
+      "willDeliver": true,
+      "messages": [],
+      "active": true,
+      "_id": "622ed2f97b4f410017da16a0",
+      "title": "my new post",
+      "description": "this is my new post description",
+      "price": "$500.00",
+      "author": {
+        "_id": "622ecd877b4f410017da169f",
+        "username": "johnny apple seed"
+      },
+      "cohort": "622b62e9f3f2a80017099369",
+      "createdAt": "2022-03-14T05:30:33.429Z",
+      "updatedAt": "2022-03-14T05:30:33.429Z",
+      "__v": 0,
+      "isAuthor": true
+    }
+  }
+}

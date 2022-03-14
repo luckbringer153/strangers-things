@@ -6,9 +6,12 @@
   </head>
   <body>
     <div id="root"></div>
-
-    <!-- move these two into your file renderers when you are able, this is just so something loads on the page -->
-    <h1>Plant World</h1>
-    <h3>Your Local Plant Adoption Center</h3>
   </body>
 </html>
+
+<!-- Page Flow:
+1. fetch initial data and build application site
+2. buildinitial interface from application site
+3. set up all event listeners for interface (these event listeners might transform interaction into API requests)
+4. user interaction triggers event listeners, which in turn update data in multiple places (pass update requests to API / API returns success or failure for update / on success update state to reflect change / on failure render useful error message to user)
+5. react re-renders components based on updated state -->

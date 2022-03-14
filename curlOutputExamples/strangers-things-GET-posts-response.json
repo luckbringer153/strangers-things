@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "error": null,
+  "data": {
+    "posts": [
+      {
+        "location": "[On Request]",
+        "willDeliver": false,
+        "messages": [],
+        "active": true,
+        "_id": "622b62e9f3f2a8001709936d",
+        "author": { "_id": "622b62e9f3f2a8001709936a", "username": "joe1234" },
+        "cohort": "622b62e9f3f2a80017099369",
+        "title": "Practically new Stradivarius",
+        "description": "I've really only used this three or four times.  I thought it would be a good purchase, shows what I know.",
+        "price": "$14.3 million",
+        "createdAt": "2022-03-11T14:55:37.644Z",
+        "updatedAt": "2022-03-11T14:55:37.696Z",
+        "__v": 0,
+        "isAuthor": false
+      },
+      {
+        "location": "Ames, IA",
+        "willDeliver": true,
+        "messages": [],
+        "active": true,
+        "_id": "622b62e9f3f2a8001709936f",
+        "author": {
+          "_id": "622b62e9f3f2a8001709936c",
+          "username": "caesar1234"
+        },
+        "cohort": "622b62e9f3f2a80017099369",
+        "title": "NordicTrack Freestrider Elliptical Trainer",
+        "description": "To be honest, it is more amazing than my resolve.",
+        "price": "$1400, OBO",
+        "createdAt": "2022-03-11T14:55:37.644Z",
+        "updatedAt": "2022-03-11T14:55:37.710Z",
+        "__v": 0,
+        "isAuthor": false
+      },
+      {
+        "location": "[On Request]",
+        "willDeliver": true,
+        "messages": [],
+        "active": true,
+        "_id": "622b62e9f3f2a8001709936e",
+        "author": { "_id": "622b62e9f3f2a8001709936b", "username": "jane1234" },
+        "cohort": "622b62e9f3f2a80017099369",
+        "title": "Golden Retriever puppies",
+        "description": "Not looking for any money, just want to find a good home for these four beautiful pups.",
+        "price": "free",
+        "createdAt": "2022-03-11T14:55:37.644Z",
+        "updatedAt": "2022-03-11T14:55:37.703Z",
+        "__v": 0,
+        "isAuthor": false
+      }
+    ]
+  }
+}
