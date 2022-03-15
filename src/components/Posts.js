@@ -8,34 +8,37 @@ import { usePosts } from "../custom-hooks";
 // this is where we write the stuff that compiles to a hydrated version of the DOM, where our HTML is listening for user interactions
 
 export default function Posts() {
-  const { posts } = usePosts(); // object or value???
+  const { posts } = usePosts();
 
-  // console.log(posts);////////////////////
+  // console.log("this is what's inside of posts right now:", posts);
 
-  const stringPosts = JSON.stringify(posts); // converting object or value to a JSON string
-
+  // const stringPosts = JSON.stringify(posts); // converting object or value to a JSON string
   // console.log(stringPosts);
 
-  //const { title, description, price, location, willDeliver } = stringPosts || {};
-  const { title, description, price, location, willDeliver, author } =
-    JSON.parse(stringPosts) || {};
+  // if (posts[0]) console.log("price is", posts[0].price);
 
-  // console.log("price is", posts[0].price);//////////////////////////
-
-  // if (willDeliver ? (willDeliver=Yes) : willDeliver=No)
-
-  return (
+  //ideally, this will prevent errors by enabling the return to be empty if posts is empty
+  return !posts ? (
     <main className="postsList">
-      <div>Look at these posts!</div>
+      <div>Sorry, no posts today!</div>
+    </main>
+  ) : (
+    <main className="postsList">
+      {/* <div>Look at these posts!</div> */}
 
-      <section className="eachPost">
-        {/* <h2>{posts[0].title}</h2> */}
-        {/* <h4>Offered by: {posts[0].author.username}</h4>
-        <p>{posts[0].description}</p>
-        <p>Listing Price: {posts[0].price}</p>
-        <p>Sold From: {posts[0].location}</p>
-        <p>Will deliver? {posts[0].willDeliver}</p> */}
-      </section>
+      {/* don't use forEach here because that would alter original array */}
+      {/* I just need some number that goes up by 1 with each iteration of the map function for as many posts as are in "array of objects" called posts */}
+      {posts.map((post) => {
+        return (
+          <section className="eachPost" key={post._id}>
+            <h2>{post.title}</h2>
+            <p>{post.description}</p>
+            <p>Listing Price: {post.price}</p>
+            <p>Sold From: {post.location}</p>
+            <p>Will deliver? {post.willDeliver ? "Yes" : "No"}</p>
+          </section>
+        );
+      })}
     </main>
   );
 }

@@ -18,6 +18,7 @@ export function usePosts() {
 
         const { success, error, data } = await response.json();
 
+        // console.log("we got this error:", error);
         // console.log("data looks like this:", data);
 
         if (success) {
