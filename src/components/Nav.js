@@ -22,11 +22,15 @@ export default function Nav() {
   return (
     <nav>
       {navLinks.map(({ id, to, name }) => (
-        <NavLink key={id} to={to}>
+        <NavLink key={id} to={to} className="onScreenLink">
           {name}
         </NavLink>
       ))}
-      {isLoggedIn && <button onClick={logout}>Logout</button>}
+      {isLoggedIn && (
+        <button onClick={logout} className="logoutButton">
+          Logout
+        </button>
+      )}
     </nav>
   );
 }

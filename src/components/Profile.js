@@ -10,7 +10,7 @@ export default function Profile() {
   return (
     <nav>
       {links.map(({ id, to, name }) => (
-        <NavLink key={id} to={to}>
+        <NavLink key={id} to={to} className="profileLinks">
           {name}
         </NavLink>
       ))}

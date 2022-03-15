@@ -57,9 +57,11 @@ export default function LoginOrRegister() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>{loginOrRegister === "register" && "Choose "}Username:</label>
+    <form onSubmit={handleSubmit} className="userInfoInputs">
+      <div className="usernameInput">
+        <label style={{ marginRight: 5 + "px" }}>
+          {loginOrRegister === "register" && "Choose "}Username:
+        </label>
         <input
           type="text"
           name="username"
@@ -67,8 +69,10 @@ export default function LoginOrRegister() {
           onChange={handleChange}
         />
       </div>
-      <div>
-        <label>{loginOrRegister === "register" && "Choose "}Password:</label>
+      <div className="passwordInput">
+        <label style={{ marginRight: 5 + "px" }}>
+          {loginOrRegister === "register" && "Choose "}Password:
+        </label>
         <input
           type="password"
           name="password"

@@ -18,6 +18,8 @@ export function usePosts() {
 
         const { success, error, data } = await response.json();
 
+        // console.log("data looks like this:", data);
+
         if (success) {
           setPosts(data.posts);
         }
