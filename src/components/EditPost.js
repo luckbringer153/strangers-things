@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../custom-hooks";
+import Posts from "./Posts";
 
-export default function AddPost() {
+//BRING IN POST ID BASED ON THE POST YOU CHOSE TO EDIT
+export default function EditPost() {
   const history = useHistory();
 
+  //unpack fields from Posts
+  const { queryString } = Posts;
+  console.log(queryString);
+
+  //fields will be equal to the values in the input fields of the listing you want to edit
+  //this isn't super easy to do, so leaving it as blank fields for now - the thought is what counts!!
   const [form, setForm] = useState({
     title: "",
     description: "",
     price: "",
     location: "",
-    willDeliver: false,
+    willDeliver: "",
   });
   const { token } = useAuth();
 
@@ -18,16 +26,14 @@ export default function AddPost() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  // when addPostButton is clicked, use the info in the five input fields to create a new post on the API
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      //fetch to get response whether POST action was successful; resolve data; leverage history api to make user go elsewhere after successful POST
       const response = await fetch(
-        `http://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/posts`,
+        // `http://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/posts/${post_id}`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -39,10 +45,10 @@ export default function AddPost() {
       const { success, data, error } = await response.json();
 
       if (success) {
-        // console.log("You did it!! A post has been made.");
+        console.log("You did it!! A post has been edited.");
         history.push("/posts");
       } else {
-        throw new Error("error creating post");
+        throw new Error("error editing post");
       }
     } catch (err) {
       console.error(err);
@@ -50,9 +56,10 @@ export default function AddPost() {
   }
 
   return (
-    <main className="addPostInputs">
-      <h3>What would you like to offer to the interwebs?</h3>
-
+    <section>
+      <h4 style={{ marginBottom: 10 + "px" }}>
+        Make your changes below, then click "Save Changes".
+      </h4>
       <form onSubmit={handleSubmit}>
         <div className="titleInput">
           <label style={{ marginRight: 5 + "px" }}>Title:</label>
@@ -101,8 +108,14 @@ export default function AddPost() {
           />
           <label style={{ marginLeft: 5 + "px" }}>(false by default)</label>
         </div>
-        <input type="submit" value="Add Post" className="addPostButton" />
+        <input type="submit" value="Save Changes" className="editPostButton" />
       </form>
-    </main>
+    </section>
   );
 }
+
+// Possible way of thinking about this:
+// 1. an "edit post" button only appears if you're the author of that post
+// 2. when you click the edit post buton, it takes you back to the same form as AddPost. This time all fields will be filled in by whatever they were on said post
+// 3. the user can change whatever they want to change, then click the "save changes" button
+// 4. the post is sent to the API as a PATCH while user is taken back to the all posts page; their changes should have been made without duplicating the listing

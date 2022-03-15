@@ -3,9 +3,12 @@ import { NavLink } from "react-router-dom";
 
 export default function Profile() {
   const links = [
-    { id: 3, to: "/profile/newpost", name: "My Posts" },
+    { id: 3, to: "/profile/newpost", name: "New Post" },
     { id: 4, to: "/profile/messages", name: "My Messages" },
   ];
+
+  // const { username } = LoginOrRegister;
+  //do "Me" logic here to get username and user id and etc.
 
   return (
     <nav>
@@ -14,7 +17,7 @@ export default function Profile() {
           {name}
         </NavLink>
       ))}
-      <div>You're in your profile now</div>
+      <div style={{ marginTop: 40 + "px" }}>Welcome to your profile, !</div>
     </nav>
   );
 }

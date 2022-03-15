@@ -41,14 +41,18 @@ export default function LoginOrRegister() {
       );
 
       //success is true or false; error and data can either be falsey/empty string or truthy/string message; removed error here because it wasn't being used
-      const { success, data } = await response.json();
+      const { success, error, data } = await response.json();
 
       if (success) {
         console.log(data);
+
         //save token to local storage
         localStorage.st_token = data.token;
         updateAuthStatus();
       } else {
+        window.alert(
+          "Please enter a valid username and/or password combination."
+        );
         throw new Error(`error with user action, "${loginOrRegister}"`);
       }
     } catch (err) {
@@ -83,6 +87,7 @@ export default function LoginOrRegister() {
       <input
         type="submit"
         value={loginOrRegister === "register" ? "Register" : "Login"}
+        className="loginRegButton"
       />
     </form>
   );

@@ -70,7 +70,7 @@ h5 {
 /* Posts component */
 .eachPost {
   background-color: whitesmoke;
-  opacity: 0.85;
+  opacity: 0.9;
   color: rgb(36, 78, 75);
 }
 
@@ -99,4 +99,63 @@ h5 {
 .passwordInput {
   margin: 0px;
   margin-bottom: 10px;
+}
+
+.loginRegButton {
+  background-color: rgb(72, 145, 140);
+  padding: 5px;
+  font-size: 14px;
+  color: whitesmoke;
+  border: none;
+  border-radius: 10%;
+}
+
+/* addPosts && SendMsg components */
+.titleInput,
+.descriptionInput,
+.priceInput,
+.locationInput,
+.willDeliverInput,
+.toWhom,
+.fromYou,
+.msgInput {
+  margin-bottom: 10px;
+}
+
+.addPostInputs,
+.sendMsgForm {
+  background-color: whitesmoke;
+  opacity: 0.85;
+  padding-bottom: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 8px;
+}
+
+.addPostButton,
+.sendMsgButton {
+  background-color: rgb(72, 145, 140);
+  padding: 5px;
+  font-size: 14px;
+  color: whitesmoke;
+  border: none;
+  border-radius: 10%;
+}
+
+/* various buttons in various components */
+.createMessageButton,
+.editPostButton,
+.deletePostButton {
+  background-color: rgb(72, 145, 140);
+  font-size: 20px;
+  color: whitesmoke;
+  border: none;
+  text-decoration: none;
+  padding: 0px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.editPostButton {
+  margin-right: 5px;
 }
