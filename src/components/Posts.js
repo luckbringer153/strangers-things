@@ -14,7 +14,11 @@ export default function Posts() {
   const { posts } = usePosts();
 
   const stringPosts = JSON.stringify(posts);
-  console.log(stringPosts["location"]);
+
+  // also return author username ("author.username"??)
+  const { title, description, price, location, willDeliver } =
+    stringPosts || {};
+  console.log({ title }); //logs "{title:undefined}"
 
   return <div>{stringPosts}</div>;
 }

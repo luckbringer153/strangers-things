@@ -7,7 +7,15 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useAuth } from "./custom-hooks";
-import { Form, Posts, AddPost, Title } from "./components"; //curly brackets for non-default imports
+import {
+  LoginOrRegister,
+  Posts,
+  Title,
+  Nav,
+  AddPost,
+  Profile,
+  Messages,
+} from "./components"; //curly brackets for non-default imports
 
 //use isLoggedIn to conditionally render things
 function App() {
@@ -20,14 +28,9 @@ function App() {
       {/* title links should be home+login for not logged in and home+profile+logout for logged in */}
       <Title />
 
-      <nav>
-        {isLoggedIn && (
-          <Link to="/">Link that only shows if you're logged in</Link>
-        )}
-        {!isLoggedIn && (
-          <Link to="/">Link that only shows if you're not logged in</Link>
-        )}
-      </nav>
+      <Nav />
+
+      {/* Switch prevents loading 2+ components at once */}
       <Switch>
         {!isLoggedIn && (
           <>
@@ -35,24 +38,33 @@ function App() {
             {/* shows all posts from API server - the home page; this can be accessed from any page via links in title banner */}
             <Route path="/posts" component={Posts} />
 
-            {/* route for login+register page, accessible from home page */}
+            {/* route for login page, accessible from home page */}
+            <Route path="/login" component={LoginOrRegister} />
+
+            {/* route for reigster page, accessible from home page */}
+            <Route path="/register" component={LoginOrRegister} />
           </>
         )}
 
         {isLoggedIn && (
           <>
+            {/* shows all posts from API server - the home page; this can be accessed from any page via links in title banner */}
+            <Route path="/posts" component={Posts} />
+
             {/* route for profile page, accessible from home page and login page */}
+            <Route exact path="/profile" component={Profile} />
 
             {/* route for add new post page, accessible from profile page */}
             <Route path="/profile/newpost" component={AddPost} />
 
             {/* route for messages page, accessible from profile page */}
+            <Route path="/profile/messages" component={Messages} />
           </>
         )}
 
         {/* catches errors */}
         {/* <Route path="*" component={() => <div>404 Not Found</div>} /> */}
-        <Redirect to="/posts" />
+        <Redirect to="/" />
       </Switch>
     </Router>
   );

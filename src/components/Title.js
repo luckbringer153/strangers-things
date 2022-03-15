@@ -7,8 +7,8 @@ import React from "react";
 const Title = () => {
   return (
     <div id="title">
-      <h1> ALIVE </h1>
-      <h5> Giving your stuff new homes since 2022 </h5>
+      <h1> The WWW Garage Sale </h1>
+      <h5> New stuff is just a click away! </h5>
     </div>
   );
 };

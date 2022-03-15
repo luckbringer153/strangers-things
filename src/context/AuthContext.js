@@ -26,6 +26,7 @@ export default function AuthProvider({ children }) {
   const logout = () => {
     delete localStorage.st_token;
     updateAuthStatus();
+    /////////////////send user to home page "/" after logging out
   };
 
   // const providerValue = { pizza: "pizza" };

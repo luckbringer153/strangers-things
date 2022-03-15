@@ -10,10 +10,17 @@ export function usePosts() {
           `https://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/posts`
         );
 
-        const {
-          data: { posts },
-        } = await response.json();
-        setPosts(posts);
+        // const {
+        //   data: { posts },
+        // } = await response.json();
+
+        // setPosts(posts);
+
+        const { success, error, data } = await response.json();
+
+        if (success) {
+          setPosts(data.posts);
+        }
       } catch (err) {
         console.error(err);
       }
