@@ -68,7 +68,9 @@ export default function Posts() {
             <p>Listing Price: {post.price}</p>
             <p>Sold From: {post.location ? post.location : "[On Request]"}</p>
             <p>Will deliver? {post.willDeliver ? "Yes" : "No"}</p>
-            {/* <p>Author ID:{post._id}</p> */}
+            <p>Post ID:{post._id}</p>
+            <p>Author ID:{post.author._id}</p>
+            <p>Author Username:{post.author.username}</p>
             {/* <p>Are you the author? {post.isAuthor ? "Yes" : "No"}</p> */}
             <p>
               {!post.isAuthor ? (

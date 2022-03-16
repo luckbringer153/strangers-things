@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useMe } from "../custom-hooks";
 
 export default function Profile() {
   const links = [
@@ -7,8 +8,10 @@ export default function Profile() {
     { id: 4, to: "/profile/messages", name: "My Messages" },
   ];
 
-  // const { username } = LoginOrRegister;
-  //do "Me" logic here to get username and user id and etc.
+  const { meData } = useMe();
+  // console.log("in profile.js, meData is:", meData);
+  const { messages } = meData || {};
+  const { posts } = meData || {};
 
   return (
     <nav>
@@ -17,7 +20,34 @@ export default function Profile() {
           {name}
         </NavLink>
       ))}
-      <div style={{ marginTop: 40 + "px" }}>Welcome to your profile, !</div>
+      <aside style={{ marginTop: 40 + "px" }}>
+        Welcome to your profile, <b>{meData.username}</b>!
+      </aside>
+      <section className="myPostsListWhole">
+        <h4>My Posts</h4>
+        <main className="myPostsList">
+          {!posts ? (
+            "You've made no posts."
+          ) : (
+            <>
+              {posts.map((post) => (
+                <div key="post._id" className="eachMyPosts">
+                  <div className="eachMyPostsID">Post ID: {post._id}</div>
+                  <div className="eachMyPostsTitle">
+                    Post Title: {post.title}
+                  </div>
+                  <div className="eachMyPostsDescription">
+                    Post Description: {post.description}
+                  </div>
+                  <div className="eachMyPostsPrice">
+                    Post Price: {post.price}
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+        </main>
+      </section>
     </nav>
   );
 }

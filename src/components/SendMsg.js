@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useAuth } from "../custom-hooks";
+import { useAuth, usePosts, useMe } from "../custom-hooks";
 
 //NEEDS AUTHOR ID FROM POST IN QUESTION
 export default function SendMsg() {
   const history = useHistory();
+  const { meData } = useMe();
 
+  // const { posts } = usePosts;
+  // const { post_id } = posts._id;
+  // console.log("Post ID:", post_id);
+
+  //pull to from the post you clicked on, pull from from current user's username
   const [form, setForm] = useState({
-    to: "",
-    from: "",
     msg: "",
   });
   //set form.to and form.from equal to their respective info based on post that was clicked and the current user
@@ -22,6 +26,24 @@ export default function SendMsg() {
     e.PreventDefault();
 
     try {
+      // const response = await fetch(
+      //   `http://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/posts/${post_id}/messages`,
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //     body: JSON.stringify({
+      //       message: {
+      //         content:
+      //           "to luckbringer from johnnyappleseed about tamales - using msg form",
+      //       },
+      //     }),
+      //   }
+      // );
+      // const result = response.json();
+      // console.log(result);
     } catch (err) {
       console.error(err);
     }
@@ -33,7 +55,7 @@ export default function SendMsg() {
 
       <form onSubmit={handleSubmit}>
         <div className="toWhom">To: author ID/name</div>
-        <div className="fromYou">From: your ID/name</div>
+        <div className="fromYou">From: {meData.username}</div>
         <div className="msgInput">
           <label style={{ marginRight: 5 + "px" }}>Your Message:</label>
           <input

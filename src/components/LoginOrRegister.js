@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 // import { useLocation } from "react-router-dom";
 import { useAuth } from "../custom-hooks";
+import { useHistory } from "react-router-dom";
 
 export default function LoginOrRegister() {
+  //history can be used to send the user somewhere else once an action is complete
+  const history = useHistory();
+
   //log-in/registration "flow"
   const { updateAuthStatus } = useAuth();
 
@@ -49,6 +53,7 @@ export default function LoginOrRegister() {
         //save token to local storage
         localStorage.st_token = data.token;
         updateAuthStatus();
+        history.push("./profile");
       } else {
         window.alert(
           "Please enter a valid username and/or password combination."
