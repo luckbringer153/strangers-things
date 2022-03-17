@@ -63,7 +63,10 @@ function App() {
             <Route path="/profile/messages" component={Messages} />
 
             {/* route for edit post page, accessible from the home page via the "edit post" button on posts that were authored by the current user */}
-            <Route path="/editpost" component={EditPost} />
+            <Route
+              path={`/editpost/?title=:title&description=:description&price=:price`}
+              component={EditPost}
+            />
 
             {/* route for sending a message to the author of a post from the home page via the "send message" button on posts that the user did not create */}
             <Route path="/sendmessage" component={SendMsg} />

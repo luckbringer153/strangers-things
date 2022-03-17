@@ -4,12 +4,14 @@ import { useAuth } from "../custom-hooks";
 import Posts from "./Posts";
 
 //BRING IN POST ID BASED ON THE POST YOU CHOSE TO EDIT
-export default function EditPost() {
+export default function EditPost(props) {
   const history = useHistory();
 
   //unpack fields from Posts
   const { queryString } = Posts;
   console.log(queryString);
+  console.log(props);
+  //and/or use the fact that the url is full of title, description, and price now
 
   //fields will be equal to the values in the input fields of the listing you want to edit
   //this isn't super easy to do, so leaving it as blank fields for now - the thought is what counts!!

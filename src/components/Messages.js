@@ -11,13 +11,10 @@ export default function Messages() {
     <>
       <p>You've got mail!</p>
       {messages.map((msg) => (
-        <>
-          <p key="post._id">
-            <div>Post ID: {msg._id}</div>
-            <div>Post Title: {msg.title}</div>
-          </p>
-          <button className="deletePostButton">Delete</button>
-        </>
+        <p key="post._id">
+          <div>Post ID: {msg._id}</div>
+          <div>Post Title: {msg.title}</div>
+        </p>
       ))}
     </>
   );
