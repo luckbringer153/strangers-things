@@ -12,12 +12,9 @@ export default function Profile() {
   // console.log("in profile.js, meData is:", meData);
   // const { messages } = meData || {};
   const { posts } = meData || {};
-  const { token } = useAuth;
+  const { token } = useAuth();
 
   const activePosts = posts ? posts.filter((post) => post.active) : [];
-
-  // const queryString = `?title=${posts.title}&description=$
-  //                 {posts.description}&price=${posts.price}`;
 
   async function clickDelete(postId) {
     let answer = false;
@@ -26,6 +23,7 @@ export default function Profile() {
     );
     if (answer) {
       // console.log("the post id for this is", postId);
+      console.log({ token });
 
       //this type of fetch will flip the post.active boolean from true to false, but it doesn't actually return the posts that are active/not active, so we need to do that map action below
       try {
@@ -86,8 +84,8 @@ export default function Profile() {
             <>
               {activePosts &&
                 activePosts.map((post) => (
-                  <section className="postBlock">
-                    <div key="post._id" className="eachMyPosts">
+                  <section className="postBlock" key={post._id}>
+                    <div className="eachMyPosts">
                       <div className="eachMyPostsID">Post ID: {post._id}</div>
                       <div className="eachMyPostsTitle">
                         Post Title: {post.title}
@@ -101,9 +99,8 @@ export default function Profile() {
                     </div>
                     <NavLink
                       key="6"
-                      to={`/editpost/?title=${post.title}&description=${post.description}&price=${post.price}`}
+                      to={`/editpost/?title=${post.title}&description=${post.description}&price=${post.price}&location=${post.location}&willDeliver=${post.willDeliver}&post_id=${post._id}`}
                       className="editPostButton"
-                      // queryString={queryString}
                     >
                       Edit
                     </NavLink>

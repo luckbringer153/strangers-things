@@ -1,26 +1,29 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "../custom-hooks";
 import Posts from "./Posts";
 
-//BRING IN POST ID BASED ON THE POST YOU CHOSE TO EDIT
-export default function EditPost(props) {
-  const history = useHistory();
+export default function EditPost() {
+  const history = useHistory(); //history isn't a sub-object here so no destructuring needed
+  const { search } = useLocation();
 
-  //unpack fields from Posts
-  const { queryString } = Posts;
-  console.log(queryString);
-  console.log(props);
-  //and/or use the fact that the url is full of title, description, and price now
+  const searchObject = new URLSearchParams(search);
+  const title = searchObject.get("title");
+  const description = searchObject.get("description");
+  const price = searchObject.get("price");
+  const location = searchObject.get("location") || "";
+  const willDeliver = searchObject.get("willDeliver") || "";
+  // console.log(title, description, price, location, willDeliver);
+  const post_id = searchObject.get("post_id");
+  // console.log(post_id);
 
   //fields will be equal to the values in the input fields of the listing you want to edit
-  //this isn't super easy to do, so leaving it as blank fields for now - the thought is what counts!!
   const [form, setForm] = useState({
-    title: "",
-    description: "",
-    price: "",
-    location: "",
-    willDeliver: "",
+    title: title,
+    description: description,
+    price: price,
+    location: location,
+    willDeliver: willDeliver,
   });
   const { token } = useAuth();
 
@@ -33,7 +36,7 @@ export default function EditPost(props) {
 
     try {
       const response = await fetch(
-        // `http://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/posts/${post_id}`,
+        `http://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/posts/${post_id}`,
         {
           method: "PATCH",
           headers: {

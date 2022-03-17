@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePosts, useAuth } from "../custom-hooks";
 import { NavLink } from "react-router-dom";
 
@@ -12,61 +12,86 @@ export default function Posts() {
   const { posts, setPosts } = usePosts();
   const { token } = useAuth();
 
-  // console.log("this is what's inside of posts right now:", posts);
-
-  // const stringPosts = JSON.stringify(posts); // converting object or value to a JSON string
-  // console.log(stringPosts);
-
-  // if (posts[0]) console.log("price is", posts[0].price);
-
-  const [form, setForm] = useState({
-    searchTerm: "",
-  });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showSearchMsg, setShowSearchMsg] = useState("false");
+  const [showSearchNoneMsg, setShowSearchNoneMsg] = useState("false");
 
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setSearchTerm(e.target.value);
   }
 
-  async function searchThrough(postId) {
-    // console.log("Searching...");
+  // function searchThrough() {
+  //   posts.forEach((post) => {
+  //     //for each item ("key") in post, see if there's a match with the search term within that key's contents
+  //     //if match is found, fetch that specific post and move on to the next one
+  //     //at the end, /posts should have a list of posts that match the searchTerm with posts that didn't filtered out
+  //     for (const key in post) {
+  //       // switch (key) {
+  //       //   case "willDeliver":
+  //       //   case "active":
+  //       //     // keep adding case XXXXXX:
+  //       //     continue; //continue is like break - jumps back to loop and ignores that word; applies to for loop not switch or if blocks
+  //       // }
 
-    // try {
-    //   const response = await fetch(
-    //     `https://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/posts/${postId}`,
-    //     {
-    //       method: "DELETE",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     }
-    //   );if (success) {
-    //   <p>Post(s) found!</p>;
+  //       const currentPostID = post._id;
+  //       const currentField = post[key];
 
-    //   const filteredPosts = posts.filter((post) => post._id !== postId);
-    //   setPosts({ ...posts, posts: filteredPosts });
-    // } else {
-    //   <p>No posts were found with that keyword.</p>;
-    // }
-    // } catch (err) {
-    //   console.error(err);
-    // }
+  //       if (typeof currentField !== "string") {
+  //         continue;
+  //       }
 
-    // const { success } = await response.json();
+  //       // console.log("key", key);
+  //       // console.log("currentField", currentField);
 
-    console.log(posts);
-    // const stringPosts = JSON.stringify(posts);
+  //       const check = currentField.indexOf("new"); //check is gonna be -1 if nothing matched
 
-    //make forEach/map/for-loop that does this: for each post, stringify it and search for searchTerm with .includes; if match is found, return that post's post._id (and/or fetch that post)
-    // forEach((post) => {
-    //   const stringedPost = JSON.stringify(post);
-    //   const success = stringedPost.includes("new");
+  //       if (check >= 0) {
+  //         console.log("Found match! It has a post ID of", currentPostID);
+  //         success = true;
+  //         setShowSearchMsg(true);
 
-    //   if (success) {
-    //     console.log("found match! It has a post ID of", post._id);
-    //   } else {
-    //     console.log("no matches found");
-    //   }
+  //         const filteredPosts = posts.filter(
+  //           (post) => post._id !== currentPostID
+  //         );
+  //         setPosts(filteredPosts);
+  //       }
+  //     }
+  //   });
+  // }
+
+  useEffect(() => {
+    setPosts(posts.filter((post) => searchTermFound(post)));
+
+    if (!showSearchMsg) {
+      setShowSearchNoneMsg(true);
+    }
+  }, [searchTerm]);
+
+  // this function returns a boolean that will be used to filter posts in the above useEffect trigger
+  function searchTermFound(post) {
+    // iterate the post keys
+    // post.forEach((post) => {
+    for (const key in post) {
+      const currentPostID = post._id;
+      const currentField = post[key];
+
+      // ignore any non-string post[key] values
+      if (typeof currentField !== "string") {
+        continue;
+      }
+
+      // if there's a match in the substring/indexOf, return true
+      // otherwise, after we loop, return false
+      const check = currentField.indexOf("new"); //check is gonna be -1 if nothing matched
+
+      if (check >= 0) {
+        // console.log("Found match! It has a post ID of", currentPostID);
+        // success = true;
+        setShowSearchMsg(true);
+
+        return true;
+      }
+    }
     // });
   }
 
@@ -76,28 +101,28 @@ export default function Posts() {
     </main>
   ) : (
     <main className="postsList">
-      {/* <div>Look at these posts!</div> */}
-
-      {/* CURRENTLY: I haven't gotten search functionality to work */}
       <span style={{ fontSize: 20 + "px" }}>What are you looking for? </span>
       <input
         type="text"
         style={{ fontSize: 15 + "px", marginBottom: 15 + "px" }}
-        value={form.searchTerm}
+        value={searchTerm}
         onChange={handleChange}
-      ></input>
+      />
       <span
         className="searchPostsButton"
         style={{ marginLeft: 5 + "px" }}
-        onClick={() => searchThrough()}
+        // onClick={searchTermFound}
       >
         Search
       </span>
 
+      {showSearchMsg && <div>Post(s) found!</div>}
+      {showSearchNoneMsg && <div>There were no posts with that keyword.</div>}
+
       {/* don't use forEach here because that would alter original array */}
       {posts.map((post) => {
         // use this to pass title, description, and price values to edit post, send message, etc
-        const queryString = `?title=${post.title}&description=${post.description}&price=${post.price}`;
+        // const queryString = `?title=${post.title}&description=${post.description}&price=${post.price}`;
 
         return (
           <section className="eachPost" key={post._id}>
@@ -111,10 +136,10 @@ export default function Posts() {
             {/* <p>Author Username:{post.author.username}</p> */}
             {/* <p>Are you the author? {post.isAuthor ? "Yes" : "No"}</p> */}
             <p>
-              {!post.isAuthor ? (
+              {!post.isAuthor && token ? (
                 <NavLink
                   key="7"
-                  to="/sendmessage"
+                  to={`/sendmessage/?authorUsername=${post.author.username}&post_id=${post._id}`}
                   className="createMessageButton"
                 >
                   I'm Interested!

@@ -5,7 +5,7 @@ import { useAuth } from "./useAuth";
 
 export function useMe() {
   const { token } = useAuth();
-  const [meData, setMeData] = useState([]);
+  const [meData, setMeData] = useState({});
 
   //things are appearing twice because useEffect() runs after componenet has entered DOM but before user sees anything on screen
   useEffect(() => {
@@ -15,7 +15,7 @@ export function useMe() {
           `https://strangers-things.herokuapp.com/api/2202-FTB-PT-WEB-FT/users/me`,
           {
             headers: {
-              "Content-Type": "application/son",
+              "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
           }
@@ -34,5 +34,5 @@ export function useMe() {
     }
     fetchMe();
   }, [token]);
-  return { meData };
+  return { meData, setMeData };
 }

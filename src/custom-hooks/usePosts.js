@@ -36,7 +36,7 @@ export function usePosts() {
     }
 
     fetchPosts();
-  }, []);
+  }, [posts]);
 
-  return { posts };
+  return { posts, setPosts };
 }

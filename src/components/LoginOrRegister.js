@@ -48,7 +48,7 @@ export default function LoginOrRegister() {
       const { success, error, data } = await response.json();
 
       if (success) {
-        console.log(data);
+        // console.log(data);
 
         //save token to local storage
         localStorage.st_token = data.token;
