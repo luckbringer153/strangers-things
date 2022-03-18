@@ -7,7 +7,7 @@ export default function Messages() {
 
   // console.log(meData);
 
-  //currently doesn't distinguish between paths because it yells at me when I try to "measure" the length of an empty array
+  //currently doesn't distinguish between paths because it yells at me when I try to "measure" the length of an empty array; weird LOL
   return !meData.messages ? (
     <p>You haven't recieved any messages.</p>
   ) : (

@@ -101,7 +101,9 @@ export default function Posts() {
     </main>
   ) : (
     <main className="postsList">
-      <span style={{ fontSize: 20 + "px" }}>What are you looking for? </span>
+      {/* //////////////////////////////////////////////////////////////// */}
+      {/* This makes searching through the posts possible! However, I just couldn't get it to work - so frustrating. Maybe another day :) */}
+      {/* <span style={{ fontSize: 20 + "px" }}>What are you looking for? </span>
       <input
         type="text"
         style={{ fontSize: 15 + "px", marginBottom: 15 + "px" }}
@@ -117,7 +119,8 @@ export default function Posts() {
       </span>
 
       {showSearchMsg && <div>Post(s) found!</div>}
-      {showSearchNoneMsg && <div>There were no posts with that keyword.</div>}
+      {showSearchNoneMsg && <div>There were no posts with that keyword.</div>} */}
+      {/* //////////////////////////////////////////////////////////////// */}
 
       {/* don't use forEach here because that would alter original array */}
       {posts.map((post) => {
